@@ -257,11 +257,17 @@ class IosOptions {
   /// Default: null
   final TextStyle? placeholderStyle;
 
+  /// 行間
+  ///
+  /// Default: 1
+  final int? lineHeight;
+
   IosOptions({
     this.autocorrect,
     this.cursorColor,
     this.keyboardAppearance,
     this.placeholderStyle,
+    this.lineHeight,
   });
 }
 
@@ -425,6 +431,7 @@ class _NativeTextInputState extends State<NativeTextInput> {
       "keyboardAppearance": widget.iosOptions?.keyboardAppearance.toString(),
       "keyboardType": widget.keyboardType.toString(),
       "width": constraints.maxWidth,
+      "lineHeight": widget.iosOptions?.lineHeight.toString(),
     };
 
     if (widget.style != null && widget.style?.fontSize != null) {
@@ -482,7 +489,7 @@ class _NativeTextInputState extends State<NativeTextInput> {
       params = {
         ...params,
         "placeholderFontFamily":
-        widget.iosOptions?.placeholderStyle?.fontFamily.toString(),
+            widget.iosOptions?.placeholderStyle?.fontFamily.toString(),
       };
     }
 

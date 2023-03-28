@@ -38,6 +38,15 @@
         _textView.autocapitalizationType = [self textAutocapitalizationTypeFromString:args[@"textCapitalization"]];
         _textView.textContainer.lineBreakMode = NSLineBreakByCharWrapping;
         
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.minimumLineHeight        = [args[@"lineHeight"] floatValue];
+        paragraphStyle.lineHeightMultiple       = [args[@"lineHeight"] floatValue];
+        paragraphStyle.maximumLineHeight        = [args[@"lineHeight"] floatValue];
+
+        NSDictionary *textViewAttributeDic = [NSDictionary dictionaryWithObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
+        _textView.typingAttributes = textViewAttributeDic;
+        
+        
         if ([args[@"maxLines"] intValue] == 1) {
             _textView.textContainer.maximumNumberOfLines = 1;
         }
@@ -88,6 +97,9 @@
         [_channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
             [weakSelf onMethodCall:call result:result];
         }];
+        
+        
+        [_textView becomeFirstResponder];
     }
     return self;
 }

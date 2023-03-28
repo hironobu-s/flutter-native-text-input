@@ -8,6 +8,7 @@
     NSString *_fontFamily;
     UIFontWeight _fontWeight;
     UIColor* _fontColor;
+    float _lineHeight;
     
     float _placeholderFontSize;
     NSString *_placeholderFontFamily;
@@ -21,6 +22,7 @@
     _fontSize = 16.0;
     _fontWeight = UIFontWeightRegular;
     _fontColor = UIColor.blackColor;
+    _lineHeight = 18.0;
     
     _placeholderFontSize = 16.0;
     _placeholderFontWeight = UIFontWeightRegular;
@@ -54,6 +56,12 @@
     if (args[@"placeholderFontColor"] && ![args[@"placeholderFontColor"] isKindOfClass:[NSNull class]]) {
         NSDictionary* placeholderFontColor = args[@"placeholderFontColor"];
         _placeholderFontColor = [UIColor colorWithRed:[placeholderFontColor[@"red"] floatValue]/255.0 green:[placeholderFontColor[@"green"] floatValue]/255.0 blue:[placeholderFontColor[@"blue"] floatValue]/255.0 alpha:[placeholderFontColor[@"alpha"] floatValue]/255.0];
+    }
+
+    // line-height
+    if (args[@"lineHeight"] && ![args[@"lineHeight"] isKindOfClass:[NSNull class]]) {
+        NSNumber* lineHeight = args[@"lineHeight"];
+        _lineHeight = [lineHeight floatValue];
     }
     
     if (self) {
